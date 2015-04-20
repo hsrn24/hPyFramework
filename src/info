@@ -5,6 +5,16 @@ class:hSystem
 	method:void:delay_us:int
 endclass
 
+global:hLED:LED1
+global:hLED:LED2
+global:hLED:LED3
+
+class:hLED
+	method:void:on
+	method:void:off
+	method:void:toggle
+endclass
+
 global:hMotor:hMot1
 global:hMotor:hMot2
 global:hMotor:hMot3
@@ -17,4 +27,16 @@ class:hMotor
 	method:void:rotAbs:int
 	method:void:setParallelMode
 	method:void:setSingleMode
+	method:void:resetEncoderCnt
+	method:int:getEncoderCnt
 endclass
+
+global:hButton:hBtn1
+global:hButton:hBtn2
+
+class:hButton
+	method:bool:isPressed
+	method:bool:waitForPressed:int
+	method:bool:waitForReleased:int
+endclass
+
