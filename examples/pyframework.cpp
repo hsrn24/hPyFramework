@@ -3,11 +3,14 @@
 #include "hPyFramework.h"
 #include <cstdio>
 
+extern "C" {
+#include "py/repl.h"
+}
+
 void qqq();
 int hMain()
 {
 	sys.taskCreate(qqq, 2, 1000);
-	for (;;);
 }
 
 void qqq()
@@ -28,7 +31,7 @@ void qqq()
 	
 	while (Serial.getRXwaiting())
 		Serial.getch();
-
+		
 	char buff[128];
 	unsigned int i = 0;
 	while (1)
@@ -55,10 +58,20 @@ void qqq()
 		if (ch == '\n')
 		{
 			buff[i] = '\0';
-			i = 0;
-			hPython::eval(buff);
-			Serial.printf("> ");
-			LED2.toggle();
+			// Serial.printf("|%s|", buff);
+			if (mp_repl_continue_with_input(buff))
+			{
+				buff[i] = '\n';
+				i++;
+				Serial.printf("# ");
+			}
+			else
+			{
+				i = 0;
+				hPython::eval(buff);
+				Serial.printf("> ");
+				LED2.toggle();
+			}
 		}
 		else
 		{
@@ -67,6 +80,7 @@ void qqq()
 		LED1.toggle();
 	}
 }
+
 
 
 
