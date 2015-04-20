@@ -5,12 +5,35 @@
 
 extern "C" {
 #include "py/repl.h"
+#include "py/runtime.h"
 }
+
+hQueue<char> queue;
 
 void qqq();
 int hMain()
 {
+	while (Serial.getRXwaiting())
+		Serial.getch();
+		
+	queue.init(100);
 	sys.taskCreate(qqq, 2, 1000);
+	
+	for (;;)
+	{
+		char q = Serial.getch();
+		if (q == 3) // ^C
+		{
+			do_vm_kill();
+		}
+		else if (q == 4) // ^D
+		{
+		}
+		else
+		{
+			queue.sendToBack(q);
+		}
+	}
 }
 
 void qqq()
@@ -29,14 +52,12 @@ void qqq()
 	
 	Serial.printf("> ");
 	
-	while (Serial.getRXwaiting())
-		Serial.getch();
-		
 	char buff[128];
 	unsigned int i = 0;
 	while (1)
 	{
-		char ch = Serial.getch();
+		char ch;
+		queue.receive(ch);
 		Serial.printf("%c", ch);
 		if (ch == 0x7f)
 		{
