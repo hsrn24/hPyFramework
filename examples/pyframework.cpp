@@ -7,13 +7,14 @@ void qqq();
 int hMain()
 {
 	sys.taskCreate(qqq, 2, 1000);
+	for (;;);
 }
 
 void qqq()
 {
 	sys.setLogDev(&Serial);
 	hPython::init();
-
+	
 	pyRegister();
 	
 	// for(;;)
@@ -24,6 +25,10 @@ void qqq()
 	// hPython::eval("print('aaaa',2+4*9)");
 	
 	Serial.printf("> ");
+	
+	while (Serial.getRXwaiting())
+		Serial.getch();
+
 	char buff[128];
 	unsigned int i = 0;
 	while (1)

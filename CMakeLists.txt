@@ -13,12 +13,6 @@ if(NOT HPYTHON_PATH)
 	set(HPYTHON_PATH ${CURRENT_DIR}/../hPython/)
 endif()
 
-set(debug_flags "")
-
-if(DEBUG)
-	set(debug_flags "${debug_flags} -DDEBUG")
-endif()
-
 include(${HFRAMEWORK_PATH}/robocore_common.cmake)
 
 include(${HPYTHON_PATH}/hPython.cmake)
