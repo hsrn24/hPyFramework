@@ -21,8 +21,7 @@ endif()
 
 include(${HFRAMEWORK_PATH}/robocore_common.cmake)
 
-include_directories("${CURRENT_DIR}/include/")
-include_directories("${HPYTHON_PATH}/include/")
+include(${HPYTHON_PATH}/hPython.cmake)
+include(${CURRENT_DIR}/hPyFramework.cmake)
 
-add_library(hPyFramework
-	src/hPyFramework.cpp)
+add_library(hPyFramework ${HPYFRAMEWORK_SOURCES})

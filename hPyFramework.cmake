@@ -4,8 +4,13 @@ get_filename_component(CURRENT_LIB_DIR ${CMAKE_CURRENT_LIST_FILE} PATH) # for cm
 include_directories("${CURRENT_LIB_DIR}/include/")
 include_directories("${CURRENT_LIB_DIR}/micropython/")
 include_directories("${CURRENT_LIB_DIR}/micropython-port/")
-include_directories("${CMAKE_SOURCE_DIR}")
 
-include(${CURRENT_LIB_DIR}/hPyFramework.cmake)
+include(${CURRENT_LIB_DIR}/include)
 
-add_source_files(${HPYFRAMEWORK_SOURCES})
+set(HPYFRAMEWORK_SOURCES ${CURRENT_LIB_DIR}/src/hPyFramework.cpp)
+
+set(PY_GENERATED qstrdefs.generated.h)
+
+add_custom_command(OUTPUT ${PY_GENERATED}
+  COMMAND python2.7 qstrdefs > ${PY_GENERATED}
+  DEPENDS qstrdefs)
