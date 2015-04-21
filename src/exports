@@ -36,7 +36,7 @@ global:hButton:hBtn2
 
 class:hButton
 	method:bool:isPressed
-	method:bool:waitForPressed:int
-	method:bool:waitForReleased:int
+	method:bool:waitForPressed:[int]
+	method:bool:waitForReleased:[int]
 endclass
 
