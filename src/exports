@@ -54,4 +54,23 @@ endclass
 
 class:hSensor_i2c:hSensor
 	method:void:selectI2C
+	method:void:selectGPIO
+	method:void:selectSoftI2C
+	method:IGPIO&:getPin1
+	method:IGPIO&:getPin2
+endclass
+
+class:IGPIO
+	method:void:setOut
+	method:void:setOutOD
+	method:void:setOutOD_pu
+	method:void:setOutOD_pd
+	method:void:setIn
+	method:void:setIn_pu
+	method:void:setIn_pd
+
+	method:bool:read
+	method:void:write:bool
+	method:void:toggle
+	method:void:reset
 endclass
