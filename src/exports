@@ -3,6 +3,11 @@ global:hSystem:sys
 class:hSystem
 	method:void:delay_ms:int
 	method:void:delay_us:int
+	method:int:getRefTime
+	method:int:getRandNr
+	method:void:reset
+	method:void:enableUsbCharging
+	method:void:disableUsbCharging
 endclass
 
 global:hLED:LED1
