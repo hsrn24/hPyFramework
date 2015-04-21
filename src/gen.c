@@ -1,12 +1,13 @@
 #include "gen.h"
 
 
-const qstr_pool_t hpyframework_pool =
+qstr_pool_t hpyframework_pool =
 {
-	&const_pool,
-	MP_QSTR_number_of,
+	0,
+	0,
 	3, // set so that the first dynamically allocated pool is twice this size; must be <= the len (just below)
 	29, // corresponds to number of strings in array just below
+	0x05000000,
 	{
 		(const byte*)"\xb9\x6d\x04" "LED1",
 		(const byte*)"\xba\x6d\x04" "LED2",

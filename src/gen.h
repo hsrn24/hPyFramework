@@ -12,14 +12,20 @@ extern "C" {
 
 void reg();
 
-extern const qstr_pool_t hpyframework_pool;
+extern qstr_pool_t hpyframework_pool;
 #ifdef __cplusplus
 }
 #endif
 
+typedef struct _mp_obj_hObject_t
+{
+	mp_obj_base_t base;
+	void *hObj;
+} mp_obj_hObject_t;
+
 enum
 {
-	start = MP_QSTR_number_of - 1,
+	start = 0x05000000 - 1,
 	MP_QSTR_LED1,
 	MP_QSTR_LED2,
 	MP_QSTR_LED3,
@@ -69,31 +75,6 @@ mp_obj_t hMotor_getEncoderCnt(mp_obj_t self_in);
 mp_obj_t hButton_isPressed(mp_obj_t self_in);
 mp_obj_t hButton_waitForPressed(mp_obj_t self_in, mp_obj_t arg0);
 mp_obj_t hButton_waitForReleased(mp_obj_t self_in, mp_obj_t arg0);
-
 #ifdef __cplusplus
 }
 #endif
-
-typedef struct _mp_obj_hSystem_t
-{
-	mp_obj_base_t base;
-	void *hObj;
-} mp_obj_hSystem_t;
-
-typedef struct _mp_obj_hLED_t
-{
-	mp_obj_base_t base;
-	void *hObj;
-} mp_obj_hLED_t;
-
-typedef struct _mp_obj_hMotor_t
-{
-	mp_obj_base_t base;
-	void *hObj;
-} mp_obj_hMotor_t;
-
-typedef struct _mp_obj_hButton_t
-{
-	mp_obj_base_t base;
-	void *hObj;
-} mp_obj_hButton_t;
