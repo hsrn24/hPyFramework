@@ -16,8 +16,8 @@ int hMain()
 	while (Serial.getRXwaiting())
 		Serial.getch();
 		
-	queue.init(100);
-	sys.taskCreate(qqq, 2, 1000);
+	queue.init(1000);
+	sys.taskCreate(qqq, 2, 2000);
 	
 	for (;;)
 	{
@@ -52,7 +52,7 @@ void qqq()
 	
 	Serial.printf("> ");
 	
-	char buff[128];
+	char buff[2048];
 	unsigned int i = 0;
 	while (1)
 	{
