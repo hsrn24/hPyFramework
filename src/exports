@@ -46,18 +46,24 @@ class:hButton
 	method:bool:waitForReleased:[int]
 endclass
 
-global:hSensor_i2c:hSens1
+global:ISensor_i2c:hSens1
 
-class:hSensor
-	method:void:currentSourceOn:bool
-endclass
-
-class:hSensor_i2c:hSensor
-	method:void:selectI2C
+class:ISensor
 	method:void:selectGPIO
 	method:void:selectSoftI2C
+	method:void:currentSourceOn:bool
+	method:IGPIO_super&:getPinIntAdc
 	method:IGPIO&:getPin1
 	method:IGPIO&:getPin2
+	method:ISensor_i2c&:getSoftwareI2C
+endclass
+
+class:ISensor_i2c:ISensor
+	method:void:selectI2C
+endclass
+
+class:ISensor_adc:ISensor
+	method:IGPIO_adc&:getPin2
 endclass
 
 class:IGPIO
@@ -73,4 +79,15 @@ class:IGPIO
 	method:void:write:bool
 	method:void:toggle
 	method:void:reset
+endclass
+
+class:IGPIO_int:IGPIO
+endclass
+class:IGPIO_adc:IGPIO
+	method:void:enableADC
+	method:void:disableADC
+	method:int:analogReadRaw
+endclass
+
+class:IGPIO_super:IGPIO_int:IGPIO_adc
 endclass
