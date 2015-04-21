@@ -30,6 +30,7 @@ global:hMotor:hMot6
 class:hMotor
 	method:void:setPower:int
 	method:void:rotAbs:int:[int]:[bool]
+	method:void:rotRel:int:[int]:[bool]
 	method:void:setParallelMode
 	method:void:setSingleMode
 	method:void:resetEncoderCnt
@@ -45,3 +46,12 @@ class:hButton
 	method:bool:waitForReleased:[int]
 endclass
 
+global:hSensor_i2c:hSens1
+
+class:hSensor
+	method:void:currentSourceOn:bool
+endclass
+
+class:hSensor_i2c:hSensor
+	method:void:selectI2C
+endclass
