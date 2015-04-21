@@ -59,6 +59,7 @@ class:ISensor
 endclass
 
 class:ISensor_i2c:ISensor
+	method:II2C&:getI2C
 	method:void:selectI2C
 endclass
 
@@ -80,7 +81,6 @@ class:IGPIO
 	method:void:toggle
 	method:void:reset
 endclass
-
 class:IGPIO_int:IGPIO
 endclass
 class:IGPIO_adc:IGPIO
@@ -88,6 +88,14 @@ class:IGPIO_adc:IGPIO
 	method:void:disableADC
 	method:int:analogReadRaw
 endclass
-
 class:IGPIO_super:IGPIO_int:IGPIO_adc
+endclass
+
+class:II2C
+	method:void:setDataRate:int
+	method:bool:write:int:hBuffer&
+endclass
+
+class:hBuffer
+	constructor:int
 endclass
