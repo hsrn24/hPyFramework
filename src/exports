@@ -29,7 +29,7 @@ global:hMotor:hMot6
 
 class:hMotor
 	method:void:setPower:int
-	method:void:rotAbs:int
+	method:void:rotAbs:int:[int]:[bool]
 	method:void:setParallelMode
 	method:void:setSingleMode
 	method:void:resetEncoderCnt
