@@ -94,8 +94,12 @@ endclass
 class:II2C
 	method:void:setDataRate:int
 	method:bool:write:int:hBuffer&
+	method:bool:read:int:hBuffer&
+	method:bool:rw:int:hBuffer&:hBuffer&
 endclass
 
 class:hBuffer
+	storevalue
 	constructor:int
+	subscript:int
 endclass
