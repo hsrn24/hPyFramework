@@ -47,6 +47,10 @@ class:hButton
 endclass
 
 global:ISensor_i2c:hSens1
+global:ISensor_i2c:hSens2
+global:ISensor_serial:hSens3
+global:ISensor_adc:hSens4
+global:ISensor:hSens5
 
 class:ISensor
 	method:void:selectGPIO
@@ -61,6 +65,10 @@ endclass
 class:ISensor_i2c:ISensor
 	method:II2C&:getI2C
 	method:void:selectI2C
+endclass
+
+class:ISensor_serial:ISensor
+	method:void:selectSerial
 endclass
 
 class:ISensor_adc:ISensor
@@ -86,6 +94,7 @@ endclass
 class:IGPIO_adc:IGPIO
 	method:void:enableADC
 	method:void:disableADC
+	method:float:analogReadVoltage
 	method:int:analogReadRaw
 endclass
 class:IGPIO_super:IGPIO_int:IGPIO_adc
@@ -93,9 +102,9 @@ endclass
 
 class:II2C
 	method:void:setDataRate:int
-	method:bool:write:int:hBuffer&
-	method:bool:read:int:hBuffer&
-	method:bool:rw:int:hBuffer&:hBuffer&
+	method:bool:write:int:buffer[byte,in]
+	method:bool:read:int:buffer[byte,out]
+	method:bool:rw:int:buffer[byte,in]:buffer[byte,out]
 endclass
 
 class:hBuffer
