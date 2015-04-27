@@ -1,6 +1,7 @@
 name:hPyFramework
 include:hFramework.h
 namespace:hFramework
+num:0x05000000
 
 global:hSystem:sys
 
