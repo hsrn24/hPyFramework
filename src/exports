@@ -1,5 +1,5 @@
 name:hPyFramework
-include:hPyFramework.h
+include:hFramework.h
 namespace:hFramework
 
 global:hSystem:sys
