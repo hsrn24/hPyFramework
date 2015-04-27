@@ -1,6 +1,10 @@
 #ifndef __HPYTHON_CONNECTOR_H__
 #define __HPYTHON_CONNECTOR_H__
 
-void pyRegister();
+void register_hPyFramework();
+namespace hPyFramework
+{
+void pyRegister() { ::register_hPyFramework(); }
+}
 
 #endif
