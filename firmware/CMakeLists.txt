@@ -10,8 +10,8 @@ endif()
 include(${HFRAMEWORK_PATH}/hFramework.cmake)
 
 add_component_lib(hPyFramework "")
-add_component_lib(hPython "../../hPython")
-add_component_lib(hPySensors "../../robocore-sensors")
-add_component_lib(hSensors "../../robocore-sensors")
+add_component_lib(hPython "${HPYTHON_PATH}")
+add_component_lib(hPySensors "${HSENSORS_PATH}")
+add_component_lib(hSensors "${HSENSORS_PATH}")
 
 add_hexecutable(hPyFramework main.cpp)
