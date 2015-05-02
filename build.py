@@ -27,6 +27,7 @@ def run():
 	args.add_argument("--debug", action="store_true")
 	args.add_argument("--release", action="store_true")
 	args.add_argument("--main", action="store_true")
+	args.add_argument("--pyconnector", action="store_true")
 	args = args.parse_args()
 
 	types=["big"]
