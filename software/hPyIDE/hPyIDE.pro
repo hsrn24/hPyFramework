@@ -11,6 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = hPyIDE
 TEMPLATE = app
 
+CONFIG += qscintilla2
 
 SOURCES += main.cpp\
         MainWindow.cpp

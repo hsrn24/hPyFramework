@@ -1,18 +1,19 @@
 #include <hFramework.h>
 #include <hPython.h>
 #include <cstdio>
-#include <hPyFramework.h>
 
 hQueue<char> queue;
+void register_hPyFramework();
+void register_hPySensors();
 
-void qqq();
+void pythonTask();
 int hMain()
 {
 	while (Serial.getRXwaiting())
 		Serial.getch();
 		
 	queue.init(1000);
-	sys.taskCreate(qqq, 2, 2000);
+	sys.taskCreate(pythonTask, 2, 2000);
 	
 	for (;;)
 	{
@@ -31,22 +32,13 @@ int hMain()
 	}
 }
 
-void qqq()
+void pythonTask()
 {
 	sys.setLogDev(&Serial);
 	hPython::init();
 	
-	hPyFramework::pyRegister();
-	
-	// for(;;)
-	{
-		LED2.toggle();
-		sys.delay_ms(50);
-	}
-	hPython::eval("hSens1.selectI2C()");
-	hPython::eval("a=hSens1.getI2C()");
-	hPython::eval("b=[0x42]");
-	hPython::eval("c=[0]");
+	register_hPyFramework();
+	register_hPySensors();
 	
 	Serial.printf("> ");
 	
@@ -58,7 +50,6 @@ void qqq()
 		char ch;
 		queue.receive(ch);
 		// Serial.printf("0x%02x\r\n", ch);
-		// continue;
 		if (ch == 0x7f)
 		{
 			if (i > 0)
@@ -102,7 +93,6 @@ void qqq()
 		if (ch == '\n')
 		{
 			buff[i] = '\0';
-			// Serial.printf("|%s|", buff);
 			if (hPython::replContinueWithInput(buff))
 			{
 				buff[i] = '\n';
@@ -114,14 +104,12 @@ void qqq()
 				i = 0;
 				hPython::eval(buff);
 				Serial.printf("> ");
-				// LED2.toggle();
 			}
 		}
 		else
 		{
 			i++;
 		}
-		// LED1.toggle();
 	}
 }
 
