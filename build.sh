@@ -27,19 +27,15 @@ TYPES="big"
 VERSIONS="0_9_5 0_9_6 0_9_7"
 NAME=hPyFramework
 
+rm -rf bin/
+mkdir -p bin/
+
 for type in $TYPES; do
 	for ver in $VERSIONS; do
-		# mkdir -p libs/RoboCORE_${ver}_${type}
-
-		# if [ "$ENABLE_DEBUG" = "1" ]; then
-			# rm -rf build_tmp/
-			# cmake -DHFRAMEWORK_PATH=$HFRAMEWORK_PATH -DROBOCORE_VERSION=$ver -DROBOCORE_TYPE=$type $ARG -DDEBUG=1 . -Bbuild_tmp
-			# make -C build_tmp/
-		# fi
-
 		rm -rf build_tmp/
 		cmake -DHFRAMEWORK_PATH=$HFRAMEWORK_PATH -DHPYTHON_PATH=$HPYTHON_PATH -DHSENSORS_PATH=$HSENSORS_PATH -DROBOCORE_VERSION=$ver -DROBOCORE_TYPE=$type $ARG -DRELEASE=1 firmware/ -Bbuild_tmp
 		make -C build_tmp/
+		cp build_tmp/hPyFramework.hex bin/hPyFramework_${ver}_${type}.hex
 	done
 done
 
