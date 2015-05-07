@@ -6,9 +6,11 @@
 class FTDI
 {
 public:
+	enum EParity { None, Odd, Even };
+	enum EStopBits { One, OneHalf, Two };
 	FTDI();
 
-	bool open(int speed);
+	bool open(int speed, EParity parity, EStopBits stopbits);
 	void close();
 
 	int write(const void* data, int len);

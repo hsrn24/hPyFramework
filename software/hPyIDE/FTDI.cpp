@@ -16,7 +16,7 @@ FTDI::FTDI()
 	m_ftdi =0;
 }
 
-bool FTDI::open(int speed)
+bool FTDI::open(int speed, EParity parity, EStopBits stopbits)
 {
 	int ret;
 
@@ -38,8 +38,23 @@ bool FTDI::open(int speed)
 	libusb_set_auto_detach_kernel_driver(m_ftdi->usb_dev, 1);
 	ftdi_read_data_set_chunksize(m_ftdi, 4096);
 	m_speed = speed;
-	
-	ftdi_set_line_property(m_ftdi, BITS_8, STOP_BIT_1, NONE);
+
+	ftdi_stopbits_type sb;
+	switch(stopbits)
+	{
+		case One: sb = STOP_BIT_1; break;
+		case OneHalf: sb = STOP_BIT_15; break;
+		case Two: sb = STOP_BIT_2; break;
+	}
+	ftdi_parity_type pa;
+	switch(parity)
+	{
+		case None: pa = NONE; break;
+		case Odd: pa = ODD; break;
+		case Even: pa = EVEN; break;
+	}
+
+	ftdi_set_line_property(m_ftdi, BITS_8, sb, pa);
 	ftdi_setflowctrl(m_ftdi, SIO_DISABLE_FLOW_CTRL);
 	
 	ftdi_disable_bitbang(m_ftdi);

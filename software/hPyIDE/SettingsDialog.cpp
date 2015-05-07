@@ -30,7 +30,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
 	ui->cbSpeed->setEditText(QString::number(speed));
 	int parity  = QSettings().value("port-parity", 0).toInt();
 	ui->cbParity->setCurrentIndex(parity);
-	int stop  = QSettings().value("port-stop", 0).toInt();
+	int stop  = QSettings().value("port-stopbits", 0).toInt();
 	ui->cbStopBits->setCurrentIndex(stop);
 }
 
@@ -122,7 +122,7 @@ void SettingsDialog::accept()
 	}
 	QSettings().setValue("port-speed", speed);
 	QSettings().setValue("port-parity", ui->cbParity->currentIndex());
-	QSettings().setValue("port-stop", ui->cbStopBits->currentIndex());
+	QSettings().setValue("port-stopbits", ui->cbStopBits->currentIndex());
 
 	QDialog::accept();
 }
