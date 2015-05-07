@@ -38,8 +38,8 @@
           </font>
          </property>
          <property name="plainText">
-          <string>tes
-	a</string>
+          <string>dir()
+dir()</string>
          </property>
         </widget>
        </item>
@@ -49,9 +49,9 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="bStop">
         <property name="text">
-         <string>PushButton</string>
+         <string>Stop</string>
         </property>
        </widget>
       </item>

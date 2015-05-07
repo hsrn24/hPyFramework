@@ -35,6 +35,8 @@ private slots:
 
 	void sendDataToFTDI(QByteArray& data);
 
+	void on_bStop_clicked();
+
 private:
 	Ui::MainWindow *ui;
 
