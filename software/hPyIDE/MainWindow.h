@@ -33,6 +33,8 @@ private slots:
 
 	void on_actionDisconnect_triggered();
 
+	void sendDataToFTDI(QByteArray& data);
+
 private:
 	Ui::MainWindow *ui;
 
@@ -41,6 +43,8 @@ private:
 	FTDI m_ftdi;
 	EState m_state;
 	QString m_log;
+
+	bool isConnected() const { return m_state == Connected; }
 };
 
 #endif // MAINWINDOW_H

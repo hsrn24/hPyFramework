@@ -80,7 +80,7 @@
         <number>0</number>
        </property>
        <item row="0" column="0">
-        <widget class="QTextEdit" name="tbConsole">
+        <widget class="MyConsole" name="tbConsole">
          <property name="font">
           <font>
            <family>DejaVu Sans Mono</family>
@@ -93,7 +93,7 @@
           <bool>false</bool>
          </property>
          <property name="readOnly">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <property name="acceptRichText">
           <bool>false</bool>
@@ -190,6 +190,13 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>MyConsole</class>
+   <extends>QTextEdit</extends>
+   <header>Widgets/MyConsole.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

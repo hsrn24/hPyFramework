@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     port/linux/timeutil.cpp \
     port/linux/ftdi_stream.c \
 		port/linux/ftdi.c \
-		FTDI.cpp
+		FTDI.cpp \
+    Widgets/MyConsole.cpp
 
 HEADERS  += MainWindow.h \
     SettingsDialog.h \
@@ -32,7 +33,8 @@ HEADERS  += MainWindow.h \
     port/linux/ftdi_version_i.h \
     port/linux/ftdi_i.h \
 		port/linux/ftdi.h \
-		FTDI.h
+		FTDI.h \
+    Widgets/MyConsole.h
 
 FORMS    += MainWindow.ui \
     SettingsDialog.ui

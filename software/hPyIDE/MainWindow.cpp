@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QSettings>
 #include <QTimer>
+#include <QByteArray>
 #include <QScrollBar>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -28,6 +29,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	palette.setColor(QPalette::Base,Qt::black);
 	palette.setColor(QPalette::Text,Qt::white);
 	ui->tbConsole->setPalette(palette);
+
+	connect(ui->tbConsole, SIGNAL(onDataGenerated(QByteArray&)), this, SLOT(sendDataToFTDI(QByteArray&)));
 }
 
 MainWindow::~MainWindow()
@@ -50,11 +53,8 @@ void MainWindow::update()
 		if (r)
 		{
 			QString txt = QString::fromAscii(d, r);
-			m_log += txt.replace("\r", "");
-			ui->tbConsole->setText(m_log);
-
-			QScrollBar * sb = ui->tbConsole->verticalScrollBar();
-				sb->setValue(sb->maximum());
+			txt = txt.replace("\r", "");
+			ui->tbConsole->appendText(txt);
 		}
 	}
 }
@@ -91,4 +91,12 @@ void MainWindow::on_actionSettings_triggered()
 {
 	SettingsDialog sd;
 	sd.exec();
+}
+
+void MainWindow::sendDataToFTDI(QByteArray& data)
+{
+	if(isConnected())
+	{
+		m_ftdi.write(data.data(), data.size());
+	}
 }
