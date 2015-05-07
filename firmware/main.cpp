@@ -49,6 +49,32 @@ void pythonTask()
 	{
 		char ch;
 		queue.receive(ch);
+		if (ch == 0x01)
+		{
+			char d;
+			uint32_t len = 0;
+			queue.receive(d);
+			len |= ((uint32_t)d << 0);
+			queue.receive(d);
+			len |= ((uint32_t)d << 8);
+			queue.receive(d);
+			len |= ((uint32_t)d << 16);
+			queue.receive(d);
+			len |= ((uint32_t)d << 24);
+			
+			char *str = (char*)sys.malloc(len);
+			for (uint32_t i = 0; i < len; i++)
+			{
+				queue.receive(d);
+				str[i] = d;
+			}
+			str[len] = 0;
+			hPython::eval(str);
+			sys.free(str);
+			i = 0;
+			continue;
+		}
+		
 		// Serial.printf("0x%02x\r\n", ch);
 		if (ch == 0x7f)
 		{
@@ -102,7 +128,7 @@ void pythonTask()
 			else
 			{
 				i = 0;
-				hPython::eval(buff);
+				hPython::evalSingle(buff);
 				Serial.printf("> ");
 			}
 		}
