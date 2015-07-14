@@ -9,7 +9,7 @@ void register_hPySensors();
 void pythonTask();
 int hMain()
 {
-	while (Serial.getRXwaiting())
+	while (Serial.available())
 		Serial.getch();
 		
 	queue.init(1000);
