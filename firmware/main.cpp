@@ -36,7 +36,11 @@ void pythonTask()
 {
 	sys.setLogDev(&Serial);
 	Python.init();
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> devel
 	register_hPyFramework();
 	register_hPySensors();
 
