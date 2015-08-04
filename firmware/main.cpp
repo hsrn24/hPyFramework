@@ -20,7 +20,7 @@ int hMain()
 		char q = Serial.getch();
 		if (q == 3) // ^C
 		{
-			hPython::killVM();
+			Python.killVM();
 		}
 		else if (q == 4) // ^D
 		{
@@ -35,7 +35,7 @@ int hMain()
 void pythonTask()
 {
 	sys.setLogDev(&Serial);
-	hPython::init();
+	Python.init();
 	
 	register_hPyFramework();
 	register_hPySensors();
@@ -69,7 +69,7 @@ void pythonTask()
 				str[i] = d;
 			}
 			str[len] = 0;
-			hPython::eval(str);
+			Python.eval(str);
 			sys.free(str);
 			i = 0;
 			continue;
@@ -119,7 +119,7 @@ void pythonTask()
 		if (ch == '\n')
 		{
 			buff[i] = '\0';
-			if (hPython::replContinueWithInput(buff))
+			if (Python.replContinueWithInput(buff))
 			{
 				buff[i] = '\n';
 				i++;
@@ -128,7 +128,7 @@ void pythonTask()
 			else
 			{
 				i = 0;
-				hPython::evalSingle(buff);
+				Python.evalSingle(buff);
 				Serial.printf("> ");
 			}
 		}
