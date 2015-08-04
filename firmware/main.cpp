@@ -11,16 +11,16 @@ int hMain()
 {
 	while (Serial.available())
 		Serial.getch();
-		
+
 	queue.init(1000);
 	sys.taskCreate(pythonTask, 2, 2000);
-	
+
 	for (;;)
 	{
 		char q = Serial.getch();
 		if (q == 3) // ^C
 		{
-            Python.killVM();
+			Python.killVM();
 		}
 		else if (q == 4) // ^D
 		{
@@ -35,13 +35,13 @@ int hMain()
 void pythonTask()
 {
 	sys.setLogDev(&Serial);
-    Python.init();
-	
+	Python.init();
+
 	register_hPyFramework();
 	register_hPySensors();
-	
+
 	Serial.printf("> ");
-	
+
 	char buff[2048];
 	unsigned int i = 0;
 	int specialState = 0;
@@ -61,7 +61,7 @@ void pythonTask()
 			len |= ((uint32_t)d << 16);
 			queue.receive(d);
 			len |= ((uint32_t)d << 24);
-			
+
 			char *str = (char*)sys.malloc(len);
 			for (uint32_t i = 0; i < len; i++)
 			{
@@ -69,12 +69,12 @@ void pythonTask()
 				str[i] = d;
 			}
 			str[len] = 0;
-            Python.eval(str);
+			Python.eval(str);
 			sys.free(str);
 			i = 0;
 			continue;
 		}
-		
+
 		// Serial.printf("0x%02x\r\n", ch);
 		if (ch == 0x7f)
 		{
@@ -119,7 +119,7 @@ void pythonTask()
 		if (ch == '\n')
 		{
 			buff[i] = '\0';
-            if (Python.replContinueWithInput(buff))
+			if (Python.replContinueWithInput(buff))
 			{
 				buff[i] = '\n';
 				i++;
@@ -128,7 +128,7 @@ void pythonTask()
 			else
 			{
 				i = 0;
-                Python.evalSingle(buff);
+				Python.evalSingle(buff);
 				Serial.printf("> ");
 			}
 		}
