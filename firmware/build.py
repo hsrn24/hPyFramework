@@ -42,6 +42,8 @@ def run():
 
     rmdir("libs/")
     os.mkdir("libs")
+    rmdir("bin/")
+    os.mkdir("bin")
 
     for info in args.versions.strip().split(","):
         (type, version) = info.split(":")

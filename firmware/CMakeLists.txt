@@ -14,4 +14,8 @@ add_component_lib(hPython "${HPYTHON_PATH}")
 add_component_lib(hPySensors "${HSENSORS_PATH}")
 add_component_lib(hSensors "${HSENSORS_PATH}")
 
-add_hexecutable(hPyFramework main.cpp)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CURRENT_DIR}/bin/")
+message(${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+
+add_hexecutable(hPyFramework_${ROBOCORE_VERSION}_${ROBOCORE_TYPE} main.cpp)
+
